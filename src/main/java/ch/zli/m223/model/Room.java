@@ -1,2 +1,7 @@
-package ch.zli.m223.model;public interface Room {
+package ch.zli.m223.model;
+
+public interface Room {
+    public Long getId();
+    public String getName();
+    public boolean getInUse();
 }

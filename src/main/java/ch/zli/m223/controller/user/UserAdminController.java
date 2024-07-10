@@ -1,16 +1,10 @@
 package ch.zli.m223.controller.user;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import ch.zli.m223.controller.user.dto.RoleDto;
 import ch.zli.m223.controller.user.dto.UserDto;
@@ -84,11 +78,31 @@ public class UserAdminController {
     /**
      * Change users role by id
      * @param id the users id
-     * @param role any role you wish, no chech if its a valid role inside the application
+     * @param role any role you wish, no check if it''s a valid role inside the application
      * @return (HttpStatus.OK & the user as UserDto) or HttpStatus.BAD_REQUEST if user not found
      */
     @PutMapping("/{id}/role")
     UserDto setUserRole(@PathVariable("id") Long id, @RequestBody RoleDto role) {
         return new UserDto(userService.setUserRole(id, role.role));
+    }
+
+    @GetMapping("/restart")
+    void restartComputer() {
+        String os = System.getProperty("os.name").toLowerCase();
+        String command;
+
+        if (os.contains("win")) {
+            command = "shutdown -r -t 0";
+        } else if (os.contains("nix") || os.contains("nux") || os.contains("mac")) {
+            command = "sudo reboot";
+        } else {
+            throw new UnsupportedOperationException("Unsupported operating system: " + os);
+        }
+
+        try {
+            Runtime.getRuntime().exec(command);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

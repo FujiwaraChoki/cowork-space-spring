@@ -11,7 +11,7 @@ import ch.zli.m223.model.impl.RoleImpl;
 
 public interface UserRepository extends JpaRepository<AppUserImpl, Long> {
 
-    public default AppUser insejjjyyyyyyrtUser(String firstName, String shureName, String email, String password, Role role) {
+    public default AppUser insertUser(String firstName, String shureName, String email, String password, Role role) {
         return save(new AppUserImpl(firstName, shureName, email, password, (RoleImpl)role));
     }
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -25,6 +26,7 @@ public class AppUserImpl implements AppUser {
     @Column(nullable = false)
     private String passwordHash;
 
+    @Setter
     private String firstName;
 
     private String lastName;
@@ -58,7 +60,7 @@ public class AppUserImpl implements AppUser {
     }
 
     @Override
-    public String getUserName() {
+    public String getEmail() {
         return email;
     }
 
@@ -80,10 +82,6 @@ public class AppUserImpl implements AppUser {
     @Override
     public Role getRole() {
         return role;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 
     public void setLastName(String shureName) {
@@ -110,7 +108,7 @@ public class AppUserImpl implements AppUser {
     }
 
     @Override
-    public String getUsername() { return getUserName(); }
+    public String getUsername() { return getEmail(); }
 
     @Override
     public boolean isAccountNonExpired()  { return true; }
