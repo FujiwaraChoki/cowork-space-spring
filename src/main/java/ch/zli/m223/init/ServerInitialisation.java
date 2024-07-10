@@ -4,11 +4,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
-
 import ch.zli.m223.repository.RoleRepository;
-import ch.zli.m223.roles.UserRoles;
 import ch.zli.m223.service.user.UserService;
 import lombok.RequiredArgsConstructor;
+import ch.zli.m223.roles.UserRoles;
 
 @Component
 @RequiredArgsConstructor
