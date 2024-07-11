@@ -1,16 +1,14 @@
 package ch.zli.m223.model.impl;
 
-import ch.zli.m223.model.Booking;
 import ch.zli.m223.model.BookingStatus;
 import ch.zli.m223.model.Duration;
-import jakarta.persistence.*;
-import lombok.RequiredArgsConstructor;
-
+import ch.zli.m223.model.Booking;
 import java.time.LocalDateTime;
+import jakarta.persistence.*;
 
 @Entity
-@RequiredArgsConstructor
 public class BookingImpl implements Booking {
+    public BookingImpl() {}
 
     public BookingImpl(Long userId, LocalDateTime bookingDate, Duration duration, BookingStatus status, Long roomId) {
         this.userId = userId;

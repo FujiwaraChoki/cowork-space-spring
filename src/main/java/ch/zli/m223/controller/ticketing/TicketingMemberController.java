@@ -10,7 +10,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/member/ticketing")
 public class TicketingMemberController {
-    // Without autowiring, since we are using RequiredArgsConstructor
     @Autowired
     private final TicketingMemberService ticketingMemberService;
 
