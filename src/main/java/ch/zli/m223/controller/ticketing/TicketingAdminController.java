@@ -16,7 +16,7 @@ public class TicketingAdminController {
     private final TicketingAdminService ticketingAdminService;
 
     @DeleteMapping("/bookings_a")
-    public void deleteBooking(@RequestBody Booking booking) {
-
+    public void deleteBooking(@RequestBody Long id) {
+        ticketingAdminService.suspendBooking(id);
     }
 }
