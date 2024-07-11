@@ -11,7 +11,7 @@ import ch.zli.m223.security.dto.SignUpDto;
 import ch.zli.m223.security.service.AuthenticationService;
 import ch.zli.m223.security.service.JwtService;
 import ch.zli.m223.service.user.UserService;
-import ch.zli.m223.service.user.exception.InvalidEmailOrPasswordException;
+import ch.zli.m223.exception.InvalidEmailOrPasswordException;
 import lombok.RequiredArgsConstructor;
 
 @Service

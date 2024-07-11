@@ -3,15 +3,23 @@ package ch.zli.m223.model.impl;
 import ch.zli.m223.model.Booking;
 import ch.zli.m223.model.BookingStatus;
 import ch.zli.m223.model.Duration;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.*;
+import lombok.RequiredArgsConstructor;
 
-import javax.annotation.processing.Generated;
 import java.time.LocalDateTime;
 
+@Entity
+@RequiredArgsConstructor
 public class BookingImpl implements Booking {
+
+    public BookingImpl(Long userId, LocalDateTime bookingDate, Duration duration, BookingStatus status, Long roomId) {
+        this.userId = userId;
+        this.bookingDate = bookingDate;
+        this.duration = duration;
+        this.status = status;
+        this.roomId = roomId;
+    }
+
     @Id
     @GeneratedValue
     private Long id;
@@ -22,10 +30,10 @@ public class BookingImpl implements Booking {
     @Column(nullable = false)
     private LocalDateTime bookingDate;
 
-    @Column(nullable = false)
+    @JoinColumn(nullable = false)
     private Duration duration;
 
-    @Column(nullable = false)
+    @JoinColumn(nullable = false)
     private BookingStatus status;
 
     @JoinColumn(nullable = false)

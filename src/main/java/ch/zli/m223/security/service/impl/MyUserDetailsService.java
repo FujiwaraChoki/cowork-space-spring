@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import ch.zli.m223.model.AppUser;
 import ch.zli.m223.repository.UserRepository;
-import ch.zli.m223.service.user.exception.UserNotFoundException;
+import ch.zli.m223.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service

@@ -1,6 +1,7 @@
 package ch.zli.m223.model;
 
-public interface BookingStatus {
-    public Long getId();
-    public String getStatus();
+
+public enum BookingStatus {
+    IN_USE,
+    NOT_IN_USE
 }

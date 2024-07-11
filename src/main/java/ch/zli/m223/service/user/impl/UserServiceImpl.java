@@ -1,21 +1,17 @@
 package ch.zli.m223.service.user.impl;
 
-import java.util.List;
-import java.util.ArrayList;
-
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import ch.zli.m223.model.AppUser;
-import ch.zli.m223.model.Role;
-import ch.zli.m223.service.user.UserService;
-import ch.zli.m223.service.user.exception.*;
-import lombok.RequiredArgsConstructor;
 import ch.zli.m223.repository.RoleRepository;
 import ch.zli.m223.repository.UserRepository;
+import ch.zli.m223.service.user.UserService;
+import lombok.RequiredArgsConstructor;
 import ch.zli.m223.roles.UserRoles;
-
-import org.springframework.security.crypto.password.PasswordEncoder;
-
+import ch.zli.m223.model.AppUser;
+import ch.zli.m223.exception.*;
+import ch.zli.m223.model.Role;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
