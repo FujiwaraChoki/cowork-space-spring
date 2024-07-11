@@ -3,12 +3,13 @@ package ch.zli.m223.model.impl;
 import ch.zli.m223.model.BookingStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 public class BookingStatusImpl implements BookingStatus {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)

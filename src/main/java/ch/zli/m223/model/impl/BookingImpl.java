@@ -6,6 +6,7 @@ import ch.zli.m223.model.Duration;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 
 import javax.annotation.processing.Generated;
 import java.time.LocalDateTime;
@@ -15,7 +16,7 @@ public class BookingImpl implements Booking {
     @GeneratedValue
     private Long id;
 
-    @Column(nullable = false)
+    @JoinColumn(nullable = false)
     private Long userId;
 
     @Column(nullable = false)
@@ -27,7 +28,7 @@ public class BookingImpl implements Booking {
     @Column(nullable = false)
     private BookingStatus status;
 
-    @Column(nullable = false)
+    @JoinColumn(nullable = false)
     private Long roomId;
 
     @Override
