@@ -66,4 +66,9 @@ public class BookingImpl implements Booking {
     public Long getRoomId() {
         return roomId;
     }
+
+    @Override
+    public void setStatus(BookingStatus status) {
+        this.status = status;
+    }
 }

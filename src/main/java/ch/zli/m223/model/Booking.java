@@ -9,4 +9,5 @@ public interface Booking {
     public Duration getDuration();
     public BookingStatus getBookingStatus();
     public Long getRoomId();
+    public void setStatus(BookingStatus status);
 }

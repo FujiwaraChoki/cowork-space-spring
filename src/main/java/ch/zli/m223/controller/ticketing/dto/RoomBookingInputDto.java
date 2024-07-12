@@ -12,5 +12,4 @@ public class RoomBookingInputDto {
     public Long roomId;
     public LocalDateTime booking_date;
     public Duration duration;
-    public BookingStatus status;
 }

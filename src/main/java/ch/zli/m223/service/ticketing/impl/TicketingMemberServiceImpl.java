@@ -2,6 +2,7 @@ package ch.zli.m223.service.ticketing.impl;
 
 import ch.zli.m223.controller.ticketing.dto.RoomBookingInputDto;
 import ch.zli.m223.exception.RoomAlreadyInUseException;
+import ch.zli.m223.model.BookingStatus;
 import ch.zli.m223.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import ch.zli.m223.service.ticketing.TicketingMemberService;
@@ -37,7 +38,7 @@ public class TicketingMemberServiceImpl implements TicketingMemberService {
                 roomBookingInputDto.user.id,
                 roomBookingInputDto.booking_date,
                 roomBookingInputDto.duration,
-                roomBookingInputDto.status,
+                BookingStatus.PENDING,
                 roomBookingInputDto.roomId
         );
     }
