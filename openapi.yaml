@@ -1,0 +1,313 @@
+openapi: 3.0.0
+info:
+  title: Ticketing and User Management API
+  version: 1.0.0
+servers:
+  - url: /api/v1
+paths:
+  /admin/users:
+    get:
+      summary: Get list of all users
+      responses:
+        '200':
+          description: A list of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserDto'
+  /admin/users/{id}:
+    get:
+      summary: Get a user by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+    patch:
+      summary: Update a user by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: User data to update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdateDto'
+      responses:
+        '200':
+          description: Updated user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+    delete:
+      summary: Delete a user by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: User deleted
+  /member/users/profile:
+    get:
+      summary: Get user's profile
+      responses:
+        '200':
+          description: User profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+  /admin/ticketing/bookings:
+    get:
+      summary: Get list of all bookings
+      responses:
+        '200':
+          description: A list of bookings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Booking'
+  /admin/ticketing/bookings/{id}:
+    get:
+      summary: Get booking by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A booking
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+    delete:
+      summary: Delete booking by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Booking deleted
+  /admin/ticketing/rooms:
+    get:
+      summary: Get list of all rooms
+      responses:
+        '200':
+          description: A list of rooms
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Room'
+    post:
+      summary: Create a new room
+      requestBody:
+        description: Room data to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Room'
+      responses:
+        '201':
+          description: Room created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+  /admin/ticketing/rooms/{id}:
+    patch:
+      summary: Update room by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Room data to update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Room'
+      responses:
+        '200':
+          description: Updated room
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+    delete:
+      summary: Delete room by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Room deleted
+  /member/ticketing/bookings:
+    post:
+      summary: Book a ticket
+      requestBody:
+        description: Booking data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoomBookingInputDto'
+      responses:
+        '201':
+          description: Booking created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+    get:
+      summary: Get list of all bookings
+      responses:
+        '200':
+          description: A list of bookings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Booking'
+  /member/ticketing/bookings/{id}:
+    get:
+      summary: Get booking by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A booking
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+  /member/ticketing/bookings/user/{id}:
+    get:
+      summary: Get bookings by user ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A list of bookings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Booking'
+components:
+  schemas:
+    UserDto:
+      type: object
+      properties:
+        id:
+          type: integer
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        role:
+          $ref: '#/components/schemas/RoleDto'
+    UserUpdateDto:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        role:
+          $ref: '#/components/schemas/RoleDto'
+    RoleDto:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+    Booking:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        roomId:
+          type: integer
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+    Room:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        capacity:
+          type: integer
+    RoomBookingInputDto:
+      type: object
+      properties:
+        userId:
+          type: integer
+        roomId:
+          type: integer
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
