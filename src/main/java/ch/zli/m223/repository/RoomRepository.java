@@ -12,4 +12,11 @@ public interface RoomRepository extends JpaRepository<RoomImpl, Long> {
 
         return room.getInUse();
     }
+
+    public default void setToInUse(Long id) {
+        RoomImpl room = findById(id).orElseThrow(() -> new RoomNotFoundException("There is no Room with the specified ID."));
+        room.setToInUse();
+
+        save(room);
+    }
 }

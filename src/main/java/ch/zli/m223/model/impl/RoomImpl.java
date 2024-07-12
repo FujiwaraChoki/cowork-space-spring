@@ -36,4 +36,9 @@ public class RoomImpl implements Room {
     public boolean getInUse() {
         return inUse;
     }
+
+    @Override
+    public void setToInUse() {
+        inUse = true;
+    }
 }

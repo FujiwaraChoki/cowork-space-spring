@@ -22,7 +22,7 @@ public class TicketingMemberController {
 
     //RoomBookingInputDto
     @PostMapping("")
-    public Booking bookTicketing(@RequestBody RoomBookingInputDto roomBookingInput) {
+    public Booking createBooking(@RequestBody RoomBookingInputDto roomBookingInput) {
         return ticketingMemberService.createBooking(roomBookingInput);
     }
 

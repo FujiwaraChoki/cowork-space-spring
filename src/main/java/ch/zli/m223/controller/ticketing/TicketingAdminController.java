@@ -1,5 +1,6 @@
 package ch.zli.m223.controller.ticketing;
 
+import ch.zli.m223.controller.ticketing.dto.RoomBookingInputDto;
 import ch.zli.m223.controller.ticketing.dto.RoomInputDto;
 import ch.zli.m223.exception.BookingNotFoundException;
 import ch.zli.m223.model.Booking;
@@ -34,6 +35,11 @@ public class TicketingAdminController {
     @GetMapping("/bookings")
     public List<Booking> getBookings() {
         return new ArrayList<Booking>(bookingRepository.findAll());
+    }
+
+    @PostMapping("/bookings")
+    public Booking createBooking(@RequestBody RoomBookingInputDto roomBookingInput) {
+        return ticketingAdminService.createBooking(roomBookingInput);
     }
 
     @DeleteMapping("/bookings")
