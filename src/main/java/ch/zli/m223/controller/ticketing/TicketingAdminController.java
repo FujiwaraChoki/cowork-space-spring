@@ -1,8 +1,10 @@
 package ch.zli.m223.controller.ticketing;
 
+import ch.zli.m223.controller.ticketing.dto.RoomInputDto;
 import ch.zli.m223.exception.BookingNotFoundException;
 import ch.zli.m223.model.Booking;
 import ch.zli.m223.model.BookingStatus;
+import ch.zli.m223.model.Room;
 import ch.zli.m223.repository.BookingRepository;
 import ch.zli.m223.service.ticketing.TicketingAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +13,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/v1/admin/ticketing")
+@RequestMapping("/api/v1/admin")
 @Transactional
 public class TicketingAdminController {
     public TicketingAdminController(TicketingAdminService ticketingAdminService, BookingRepository bookingRepository) {
@@ -26,13 +31,23 @@ public class TicketingAdminController {
     @Autowired
     private final BookingRepository bookingRepository;
 
-    @DeleteMapping("/bookings_a")
+    @GetMapping("/bookings")
+    public List<Booking> getBookings() {
+        return new ArrayList<Booking>(bookingRepository.findAll());
+    }
+
+    @DeleteMapping("/bookings")
     public void deleteBooking(@RequestBody Long id) {
         ticketingAdminService.suspendBooking(id);
     }
 
+    @PostMapping("/room")
+    public Room createRoom(@RequestBody RoomInputDto room) {
+        return ticketingAdminService.createRoom(room.name, room.inUse);
+    }
+
     // Change status
-    @PutMapping("/booking_status/{bookingId}")
+    @PutMapping("/status/{bookingId}")
     public void updateBooking(@RequestBody String status, @PathVariable Long bookingId) {
         if(status.equals("ACCEPTED")) {
             Booking booking = bookingRepository.findByBookingId(bookingId);

@@ -14,29 +14,29 @@ import ch.zli.m223.model.Booking;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/member/ticketing")
+@RequestMapping("/api/v1/member/bookings")
 @RequiredArgsConstructor
 public class TicketingMemberController {
     @Autowired
     private final TicketingMemberService ticketingMemberService;
 
     //RoomBookingInputDto
-    @PostMapping("/bookings")
+    @PostMapping("")
     public Booking bookTicketing(@RequestBody RoomBookingInputDto roomBookingInput) {
         return ticketingMemberService.createBooking(roomBookingInput);
     }
 
-    @GetMapping("/bookings")
+    @GetMapping("")
     public List<Booking> getBookings() {
         return ticketingMemberService.getAllBookings();
     }
 
-    @GetMapping("/bookings/{id}")
+    @GetMapping("/{id}")
     public Booking getBooking(@PathVariable Long id) {
         return ticketingMemberService.getBooking(id);
     }
 
-    @GetMapping("/bookings/user/{id}")
+    @GetMapping("/user/{id}")
     public List<Booking> getBookingsByUserId(@PathVariable Long id) {
         return ticketingMemberService.getBookingsByUserId(id);
     }

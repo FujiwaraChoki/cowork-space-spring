@@ -15,6 +15,13 @@ public class RoomImpl implements Room {
     @Column(nullable = false)
     private boolean inUse;
 
+    public RoomImpl(String name, boolean inUse) {
+        this.name = name;
+        this.inUse = inUse;
+    }
+
+    public RoomImpl() {}
+
     @Override
     public Long getId() {
         return id;

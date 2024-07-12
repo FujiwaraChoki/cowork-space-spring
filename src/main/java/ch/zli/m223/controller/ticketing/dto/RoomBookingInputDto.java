@@ -7,7 +7,6 @@ import ch.zli.m223.security.dto.JwtTokenDto;
 import java.time.LocalDateTime;
 
 public class RoomBookingInputDto {
-    public JwtTokenDto token;
     public UserInputDto user;
     public Long roomId;
     public LocalDateTime booking_date;
