@@ -1,6 +1,8 @@
 package ch.zli.m223.service.ticketing.impl;
 
 import ch.zli.m223.controller.ticketing.dto.RoomBookingInputDto;
+import ch.zli.m223.exception.RoomAlreadyInUseException;
+import ch.zli.m223.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import ch.zli.m223.service.ticketing.TicketingMemberService;
 import ch.zli.m223.exception.BookingNotFoundException;
@@ -16,12 +18,21 @@ public class TicketingMemberServiceImpl implements TicketingMemberService {
     @Autowired
     private final BookingRepository bookingRepository;
 
-    public TicketingMemberServiceImpl(BookingRepository bookingRepository) {
+    @Autowired
+    private final RoomRepository roomRepository;
+
+    public TicketingMemberServiceImpl(BookingRepository bookingRepository, RoomRepository roomRepository) {
         this.bookingRepository = bookingRepository;
+        this.roomRepository = roomRepository;
     }
 
     @Override
     public Booking createBooking(RoomBookingInputDto roomBookingInputDto) {
+        // check if room is already in use
+        if(roomRepository.isRoomInUse(roomBookingInputDto.roomId)) {
+            throw new RoomAlreadyInUseException();
+        }
+
         return bookingRepository.addBooking(
                 roomBookingInputDto.user.id,
                 roomBookingInputDto.booking_date,

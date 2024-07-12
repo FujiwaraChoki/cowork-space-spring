@@ -4,7 +4,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public interface AppUser extends UserDetails {
     Long getId();
-    String getEmail(); //his email
+    String getEmail();
     String getFirstName();
     String getLastName();
     String getPassword();

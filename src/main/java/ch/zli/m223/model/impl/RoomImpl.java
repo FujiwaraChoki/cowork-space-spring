@@ -1,11 +1,9 @@
 package ch.zli.m223.model.impl;
 
 import ch.zli.m223.model.Room;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+@Entity
 public class RoomImpl implements Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +14,6 @@ public class RoomImpl implements Room {
 
     @Column(nullable = false)
     private boolean inUse;
-
 
     @Override
     public Long getId() {
